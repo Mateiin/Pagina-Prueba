@@ -1,0 +1,58 @@
+body    { 
+    font-family:Arial, sans-serif; 
+    margin:0; 
+    background:#f7f7f7; 
+    color:#222; 
+}
+
+header  { 
+    background:#222; 
+    color:#fff; 
+    padding:20px; 
+    text-align:center; 
+}
+
+nav     { 
+    background:#444; 
+    padding:10px; 
+    text-align:center; 
+}
+   
+nav a   { 
+    color:#fff; 
+    margin:0 10px; 
+    text-decoration:none; 
+    font-weight:bold; 
+}
+    
+.compra-box { 
+    background:#fff; 
+    max-width:400px; margin:40px auto; 
+    padding:30px 20px; 
+    border-radius:10px; 
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    text-align:center; 
+}
+
+.compra-box h2 { 
+    margin-bottom:18px; 
+}
+
+.compra-box p { 
+    margin-bottom:10px; 
+}
+
+.btn-volver { 
+    margin-top:18px; 
+    display:inline-block; 
+    background:#3498db; color:#fff; 
+    padding:10px 22px; 
+    border:none; 
+    border-radius:6px; 
+    text-decoration:none; 
+    font-weight:bold; 
+}
+
+.btn-volver:hover { 
+        background:#217dbb; 
+}

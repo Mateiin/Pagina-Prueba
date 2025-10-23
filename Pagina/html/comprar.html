@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comprar producto - Fenix Sport</title>
+  <link rel="stylesheet" href="../css/comprar.css">
+</head>
+<body>
+  <header>
+    <h1>Fenix Sport</h1>
+  </header>
+  <nav>
+    <a href="inicio.html">Inicio</a>
+    <a href="productos.html">Productos</a>
+    <a href="ofertas.html">Ofertas</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="compra-box">
+    <h2>¡Gracias por tu compra!</h2>
+    <p id="producto"></p>
+    <p id="precio"></p>
+    <a class="btn-volver" id="volver-catalogo" href="#">Volver al catálogo</a>
+  </div>
+  <script>
+    // Lee los parámetros de la URL
+    const params = new URLSearchParams(window.location.search);
+    const producto = params.get('producto');
+    const precio = params.get('precio');
+    const categoria = params.get('categoria');
+
+    document.getElementById('producto').textContent = producto ? `Producto: ${producto}` : '';
+    document.getElementById('precio').textContent = precio ? `Precio: $${precio}` : '';
+
+    // Cambia el enlace para volver al catálogo filtrado
+    const volverBtn = document.getElementById('volver-catalogo');
+    if (categoria) {
+      volverBtn.href = `catalogo.html?product=${encodeURIComponent(categoria)}`;
+    } else {
+      volverBtn.href = "catalogo.html";
+    }
+  </script>
+</body>
+</html>

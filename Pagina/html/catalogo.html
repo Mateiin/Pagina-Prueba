@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo - Fenix Sport</title>
+  <link rel="stylesheet" href="../css/catalogo.css">
+</head>
+<body>
+  <header>
+    <h1>Catálogo</h1>
+  </header>
+
+  <nav>
+    <a href="inicio.html">Inicio</a>
+    <a href="productos.html">Productos</a>
+    <a href="ofertas.html">Ofertas</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+
+  <div class="wrap">
+    <a class="back" href="productos.html">← Volver a Productos</a>
+    <h2 id="catalog-title">Catálogo</h2>
+    <div class="grid" id="catalog-grid">
+      <!-- Items se insertan vía JS -->
+    </div>
+  </div>
+
+  <script>
+    const catalog = {
+      pantalones: [
+        {name:"Pantalón Training 1", price:850, img:"../Catalogo/P1.JPEG"},
+        {name:"Pantalón Running 2", price:950, img:"../Catalogo/P2.JPEG"},
+        {name:"Jogger Comfort", price:1200, img:"../Catalogo/P3.JPEG"},
+        {name:"Pantalón Térmico", price:1400, img:"../Catalogo/P4.JPEG"}
+      ],
+      zapatillas: [
+        {name:"Zapa Runner A", price:899, img:"../Catalogo/Z1.JPEG"},
+        {name:"Zapa Trail B", price:1299, img:"../Catalogo/Z2.JPEG"},
+        {name:"Zapa Casual", price:699, img:"../Catalogo/Z3.JPEG"},
+        {name:"Zapa Elite", price:1799, img:"../Catalogo/Z4.JPEG"}
+      ],
+      remeras_futbol: [
+        {name:"Camiseta River", price:599, img:"../Catalogo/RIVER.JPEG"},
+        {name:"Camiseta Racing", price:599, img:"../Catalogo/RACIN.JPEG"},
+        {name:"Camiseta BOOOOOCAAA", price:999, img:"../Catalogo/BOCA.JPEG"}
+      ],
+      remeras: [
+        {name:"Remera Básica", price:299, img:"../Catalogo/R1.JPEG"},
+        {name:"Remera Técnica", price:449, img:"../Catalogo/R2.JPEG"},
+        {name:"Remera Estampada", price:379, img:"../Catalogo/R3.JPEG"}
+      ]
+    };
+
+    function getQueryParam(name) {
+      const params = new URLSearchParams(location.search);
+      return params.get(name);
+    }
+
+    function renderCatalog(category) {
+      const grid = document.getElementById('catalog-grid');
+      const title = document.getElementById('catalog-title');
+      grid.innerHTML = '';
+      if (!category || !catalog[category]) {
+        title.textContent = 'Catálogo completo';
+        for (const cat in catalog) {
+          catalog[cat].forEach(item => addItem(item, cat));
+        }
+      } else {
+        title.textContent = 'Catálogo: ' + category.replace('_',' ');
+        catalog[category].forEach(item => addItem(item, category));
+      }
+    }
+
+    function addItem(item, categoriaActual) {
+      const grid = document.getElementById('catalog-grid');
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML = `
+        <img src="${item.img}" alt="${item.name}">
+        <div class="title">${item.name}</div>
+        <div class="price">$${item.price}</div>
+        <button class="buy-btn">Comprar</button>
+      `;
+      div.querySelector('.buy-btn').onclick = function() {
+        window.location.href = `comprar.html?producto=${encodeURIComponent(item.name)}&precio=${encodeURIComponent(item.price)}${categoriaActual ? `&categoria=${encodeURIComponent(categoriaActual)}` : ''}`;
+      };
+      grid.appendChild(div);
+    }
+
+    const product = getQueryParam('product');
+    renderCatalog(product);
+  </script>
+</body>
+</html>
